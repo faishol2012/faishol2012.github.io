@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment FAISHOL HOST</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a23;
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #10102a;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00f0ff70;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .card img.avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #00f0ff;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+
+    select {
+      background: #1e1e3a;
+      color: white;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      margin: 10px 0;
+    }
+
+    .highlight {
+      color: #00f0ff;
+      font-weight: bold;
+    }
+
+    .payment-options {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+
+    .payment-options button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      background: #1e1e3a;
+      border: 2px solid #00f0ff;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .payment-options button.active,
+    .payment-options button:hover {
+      background: #00f0ff;
+      color: #000;
+    }
+
+    .payment-detail {
+      margin-top: 15px;
+    }
+
+    .payment-detail p {
+      margin: 6px 0;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #00f0ff;
+      padding: 6px 15px;
+      border-radius: 8px;
+      color: #00f0ff;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    .whatsapp-btn {
+      background: #00f0ff;
+      color: #000;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .note {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    #qris-img {
+      width: 200px;
+      margin: 10px auto;
+      display: none;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="avatar" src="https://img1.pixhost.to/images/6908/617597647_alizz.jpg" alt="Avatar">
+    <select>
+      <option selected>🇮🇩 Indonesia</option>
+    </select>
+    <h2>Payment <span class="highlight">FAISHOL HOST 🦅</span></h2>
+
+    <div class="payment-options">
+      <button id="btn-dana">DANA</button>
+      <button id="btn-gopay" class="active">GoPay</button>
+      <button id="btn-qris">QRIS</button>
+    </div>
+
+    <div class="payment-detail" id="detail">
+      <p id="label">GoPay:</p>
+      <p id="nomor">088983103122</p>
+      <p>A/n FAISHOL HOST</p>
+      <button class="copy-btn" onclick="salinNomor()">Salin Nomor</button>
+      <img id="qris-img" src="https://img1.pixhost.to/images/6908/617596989_alizz.jpg" alt="QRIS Code">
+    </div>
+
+    <p class="note">
+      Setelah transfer, mohon kirimkan bukti pembayaran ke <span class="highlight">FAISHOL HOST 🦅</span> melalui WhatsApp.
+    </p>
+    <a href="https://wa.me/6287832976108" target="_blank">
+      <button class="whatsapp-btn">Hubungi WhatsApp</button>
+    </a>
+  </div>
+
+  <script>
+    const btnDana = document.getElementById("btn-dana");
+    const btnGopay = document.getElementById("btn-gopay");
+    const btnQris = document.getElementById("btn-qris");
+    const nomor = document.getElementById("nomor");
+    const label = document.getElementById("label");
+    const qrisImg = document.getElementById("qris-img");
+
+    const nomorVA = "088983103122";
+
+    btnDana.onclick = () => {
+      setActive(btnDana);
+      label.innerText = "DANA:";
+      nomor.innerText = nomorVA;
+      qrisImg.style.display = "none";
+    };
+
+    btnGopay.onclick = () => {
+      setActive(btnGopay);
+      label.innerText = "GoPay:";
+      nomor.innerText = nomorVA;
+      qrisImg.style.display = "none";
+    };
+
+    btnQris.onclick = () => {
+      setActive(btnQris);
+      label.innerText = "QRIS:";
+      nomor.innerText = "Scan kode QR di bawah ini:";
+      qrisImg.style.display = "block";
+    };
+
+    function setActive(activeBtn) {
+      [btnDana, btnGopay, btnQris].forEach(btn => btn.classList.remove("active"));
+      activeBtn.classList.add("active");
+    }
+
+    function salinNomor() {
+      const text = document.getElementById("nomor").innerText;
+      if (!text.includes("Scan")) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert("Nomor berhasil disalin!");
+        });
+      }
+    }
+  </script>
+</body>
+</html>
